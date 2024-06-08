@@ -19,7 +19,7 @@ class CRUDRepository(Generic[T, U, V]):
         self.db = db
 
     def get_by_id(self, model_id: uuid.UUID) -> Optional[T]:
-        return self.db.query(self.model).filter(self.model.customer_id == model_id).first()
+        return self.db.query(self.model).filter(self.model.id == model_id).first()
 
     def get_all(self) -> List[T]:
         return self.db.query(self.model).all()
