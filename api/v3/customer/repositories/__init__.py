@@ -1,0 +1,2 @@
+from .customer import CustomerRepository
+from .customer_personal_info import CustomerPersonalInfoRepository

@@ -1,0 +1,2 @@
+from .customer import CustomerCreate, CustomerRead, CustomerUpdate
+from .customer_personal_info import CustomerPersonalInfoCreate, CustomerPersonalInfoRead, CustomerPersonalInfoUpdate
