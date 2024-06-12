@@ -1,13 +1,12 @@
 import uuid
 from typing import Optional
 
-from api.v3.customer.models import CustomerPersonalInfo
 from api.v3.customer.repositories import CustomerPersonalInfoRepository
 from api.v3.customer.schemas import CustomerPersonalInfoCreate, CustomerPersonalInfoUpdate, CustomerPersonalInfoRead
 from api.v3.templates import CRUDService
 
 
-class CustomerPersonalInfoService(CRUDService[CustomerPersonalInfo, CustomerPersonalInfoCreate,
+class CustomerPersonalInfoService(CRUDService[CustomerPersonalInfoCreate,
                                   CustomerPersonalInfoRead, CustomerPersonalInfoUpdate, CustomerPersonalInfoRepository]
                                   ):
     def __init__(self, customer_info_repository: CustomerPersonalInfoRepository):

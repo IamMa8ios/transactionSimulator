@@ -28,12 +28,6 @@ async def get_by_customer_id(customer_id: UUID, customer_personal_info_service: 
     return customer_personal_info_service.get_by_customer_id(customer_id)
 
 
-@router.get("/random", response_model=CustomerPersonalInfoRead)
-async def get_random_customer(customer_personal_info_service: Annotated[CustomerPersonalInfoService,
-                              Depends(get_customer_personal_info_service)]):
-    return customer_personal_info_service.get_random()
-
-
 @router.post("", response_model=CustomerPersonalInfoRead,
              dependencies=[Depends(get_customer_personal_info_service)], status_code=status.HTTP_201_CREATED)
 async def create_customer_personal_info(customer_personal_info: CustomerPersonalInfoCreate,

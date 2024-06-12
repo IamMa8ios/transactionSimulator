@@ -1,10 +1,9 @@
-from api.v3.product.models import ProductVariant
 from api.v3.product.repositories import ProductVariantRepository
 from api.v3.product.schemas import ProductVariantUpdate, ProductVariantCreate, ProductVariantRead
 from api.v3.templates import CRUDService
 
 
-class ProductVariantService(CRUDService[ProductVariant, ProductVariantCreate, ProductVariantRead, ProductVariantUpdate,
+class ProductVariantService(CRUDService[ProductVariantCreate, ProductVariantRead, ProductVariantUpdate,
                             ProductVariantRepository]):
 
     def __init__(self, product_variant_repository: ProductVariantRepository):
