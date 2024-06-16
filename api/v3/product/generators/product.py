@@ -56,7 +56,8 @@ def generate_product_data(num_products):
 
     with Session(engine) as session:
         product_repository = ProductRepository(session)
-        for _ in range(num_products):
+        total = 0
+        while total < num_products:
             product_type = random.choice(types)
             brand = random.choice(brand_mapping.get(product_type, brands))
             category = random.choice(categories)
@@ -78,11 +79,12 @@ def generate_product_data(num_products):
                 cost=cost
             )
 
-            product_repository.create(product)
+            try:
+                product_repository.create(product)
+                total += 1
+            except IntegrityError:
+                # print(f"IntegrityError: {e}")
+                session.rollback()
 
 
-for i in range(1, 5):
-    try:
-        generate_product_data(100)
-    except IntegrityError as e:
-        print(f"IntegrityError: {e}")
+# generate_product_data(100)

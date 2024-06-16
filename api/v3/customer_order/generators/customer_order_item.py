@@ -12,13 +12,13 @@ from api.v3.shipment.models import CustomerOrderShipment, BackorderShipment
 from api.v3.customer_order.models import CustomerOrder, CustomerOrderItem
 
 
-def generate_customer_order_data(orders, num_order_items):
+def generate_customer_order_item_data(orders, num_order_items):
     with Session(engine) as session:
         item_repository = CustomerOrderItemRepository(session)
         order_id = CustomerOrderRepository(session).get_random().id
 
-        for i in range(orders):
-            for j in range(num_order_items):
+        for _ in range(orders):
+            for __ in range(num_order_items):
 
                 variant_id = ProductVariantRepository(session).get_random().id
                 quantity = random.randint(1, 10)
@@ -32,4 +32,4 @@ def generate_customer_order_data(orders, num_order_items):
                 item_repository.create(item)
 
 
-generate_customer_order_data(3, 5)
+# generate_customer_order_item_data(3, 5)

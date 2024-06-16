@@ -71,6 +71,18 @@ class TicketStatus(str, Enum):
     UNRESOLVED = 'Unresolved'
 
 
+channel_mapping = {
+    ChannelLevel1.WEBSITE: [ChannelLevel2.AMAZON, ChannelLevel2.EBAY, ChannelLevel2.OUR_WEBSITE, ChannelLevel2.NEWEGG,
+                            ChannelLevel2.ETSY, ChannelLevel2.ALIBABA],
+    ChannelLevel1.CALL_CENTER: [ChannelLevel2.WALMART, ChannelLevel2.BEST_BUY, ChannelLevel2.TARGET],
+    ChannelLevel1.MARKETPLACE: [ChannelLevel2.AMAZON, ChannelLevel2.EBAY, ChannelLevel2.ETSY, ChannelLevel2.ALIBABA],
+    ChannelLevel1.MOBILE_APP: [ChannelLevel2.AMAZON, ChannelLevel2.EBAY, ChannelLevel2.OUR_WEBSITE,
+                               ChannelLevel2.NEWEGG, ChannelLevel2.ETSY],
+    ChannelLevel1.PHYSICAL_STORE: [ChannelLevel2.PHYSICAL_STORE_1, ChannelLevel2.PHYSICAL_STORE_2,
+                                   ChannelLevel2.WALMART, ChannelLevel2.BEST_BUY, ChannelLevel2.TARGET]
+}
+
+
 # Without this class, SQLAlchemy will pass the Enum's Key Name instead of the desired String
 class StringEnum(TypeDecorator):
     impl = String

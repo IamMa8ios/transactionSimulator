@@ -1,4 +1,6 @@
 import random
+
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from api.v3.db import engine
@@ -15,14 +17,17 @@ sizes = ["XS", "S", "M", "L", "XL", "XXL"]
 
 
 def generate_product_variants(num_variants):
+
     with Session(engine) as session:
         variant_repository = ProductVariantRepository(session)
         product = ProductRepository(session).get_random()
-        for num in range(num_variants):
+
+        total = 1
+        while total <= num_variants:
             color = random.choice(colors)
             pattern = random.choice(patterns)
             size = random.choice(sizes)
-            image = f"api/v3/products/{product.id}/variants/{num}"
+            image = f"api/v3/products/{product.id}/variants/{total}"
             inventory = random.randint(1, 100)
             availability = random.choice(list(Availability))
             price = round(random.uniform(5.0, 1000.0), 2)
@@ -40,7 +45,12 @@ def generate_product_variants(num_variants):
                 cost=cost
             )
 
-            variant_repository.create(variant)
+            try:
+                variant_repository.create(variant)
+                total += 1
+            except IntegrityError:
+                # print(f"IntegrityError: {e}")
+                session.rollback()
 
 
-generate_product_variants(10)
+# generate_product_variants(10)
